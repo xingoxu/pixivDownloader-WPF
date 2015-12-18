@@ -1,0 +1,18 @@
+{
+  "msg": "ok",
+  "status": "success",
+  "response": [
+    {
+      "id": "0",
+      "target_user": {
+        "id": 3354866,
+        "name": "もど",
+        "account": "modo-mix",
+        "status": "0"
+      },
+      "user_id": "10512403",
+      "publicity": "public"
+    }
+  ],
+  "count": 1
+}

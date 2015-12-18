@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="pixiv_downloader.Contents.illustAndFav"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Style="{StaticResource ContentRoot}">
+        <mui:ModernTab x:Name="TabChooser" Layout="Tab" SelectedSourceChanged="TabChooser_SelectedSourceChanged" >
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="作品" Source="/Contents/authorIllustViewSplit.xaml"/>
+                <mui:Link DisplayName="收藏" Source="/Contents/FavpicViewSplit.xaml"/>
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
+        <Image x:Name="authorImage" HorizontalAlignment="Left" Height="28" Margin="0,-28,0,0" VerticalAlignment="Top" Width="31"/>
+        <Label x:Name="authorNameLabel" Content="加载中..." HorizontalAlignment="Left" Margin="31,-28,0,0" VerticalAlignment="Top" Height="16" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+        <Label x:Name="authorIDLabel" Content="加载中..." HorizontalAlignment="Left" Margin="31,-12,0,0" VerticalAlignment="Top" Height="12" HorizontalContentAlignment="Center"  FontSize="9.333"/>
+
+    </Grid>
+</UserControl>

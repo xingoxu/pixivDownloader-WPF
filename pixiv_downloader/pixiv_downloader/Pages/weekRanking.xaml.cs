@@ -1,0 +1,381 @@
+﻿using FirstFloor.ModernUI.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Threading;
+using FirstFloor.ModernUI.Windows.Navigation;
+using FirstFloor.ModernUI.Windows.Controls;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+
+namespace pixiv_downloader.Pages
+{
+    /// <summary>
+    /// Interaction logic for weekRanking.xaml
+    /// </summary>
+    public partial class weekRanking : UserControl,IContent
+    {
+
+        pixiv_API.pixivAPI pixivAPI;
+        pixivIllust[] illust;
+        public weekRanking()
+        {
+            InitializeComponent();
+            page = 1;
+            first_init = true;
+            view.nextPageButton.Click += NextPageButton_Click;
+            view.lastPageButton.Click += LastPageButton_Click;
+            //((GridView)((ListView)view.piclistViewLeft.FindName("picListView")).View).Columns[4].Header = "上次排名";
+            ((GridView)((ListView)view.piclistViewLeft.FindName("picListView")).View).Columns[3].Header = "排名";
+
+        }
+
+        private async void LastPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (page == 1) return;
+            processing = true;
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
+            view.IsEnabled = false;
+            progressbar.Visibility = Visibility.Visible;
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
+
+            CancelTokenSource = new CancellationTokenSource();
+            try
+            {
+                await listview_load(page - 1, 50);
+            }
+            catch
+            {
+                except_return("User cancelled actions.");
+                view.IsEnabled = true;
+                view.nextPageButton.IsEnabled = false;
+                view.lastPageButton.IsEnabled = false;
+
+                cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+                processing = false;
+                return;
+            }
+            page--;
+            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
+
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
+            except_return("Done");
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+            processing = false;
+        }
+
+        private async void NextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            processing = true;
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
+            view.IsEnabled = false;
+            progressbar.Visibility = Visibility.Visible;
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
+
+            CancelTokenSource = new CancellationTokenSource();
+            try
+            {
+                await listview_load(page + 1, 50);
+            }
+            catch
+            {
+                except_return("User cancelled actions.");
+                view.IsEnabled = true;
+                view.nextPageButton.IsEnabled = false;
+                view.lastPageButton.IsEnabled = false;
+
+                cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+                processing = false;
+                return;
+            }
+            page++;
+            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
+            except_return("Done");
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+            processing = false;
+        }
+        private async void refresh()
+        {
+            if (pixivAPI == null)
+            {
+                if (((MainWindow)App.Current.MainWindow).pixivAPI == null)
+                {
+                    view.IsEnabled = false;
+                    return;
+                }
+                pixivAPI = ((MainWindow)App.Current.MainWindow).pixivAPI;
+            }
+            pixivAPI = ((MainWindow)App.Current.MainWindow).pixivAPI;
+            processing = true;
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
+            view.IsEnabled = false;
+            progressbar.Visibility = Visibility.Visible;
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
+
+            CancelTokenSource = new CancellationTokenSource();
+            try
+            {
+                await listview_load(page, 50);
+            }
+            catch
+            {
+                except_return("User cancelled actions.");
+                view.IsEnabled = true;
+                view.nextPageButton.IsEnabled = false;
+                view.lastPageButton.IsEnabled = false;
+
+                cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+                processing = false;
+                return;
+            }
+
+            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
+            except_return("Done");
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+            processing = false;
+        }
+        private bool first_init;
+        private int page;
+        private int total;
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+
+        }
+        private CancellationTokenSource CancelTokenSource;
+        private bool processing;
+        private async Task listview_load(int page, int per_page)
+        {
+            CancelTokenSource = new CancellationTokenSource();
+            JObject json = null;
+            try
+            {
+                json = await pixivAPI.rankingAsync("all", "weekly", page, per_page, null, CancelTokenSource);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (json == null)
+            {
+                except_return("Done");
+                Debug.WriteLine(2);
+                return;
+            }
+
+            //set next and last button
+            if (json["pagination"]["next"].Type == JTokenType.Null) view.nextPageButton.IsEnabled = false;
+            else view.nextPageButton.IsEnabled = true;
+            if (json["pagination"]["previous"].Type == JTokenType.Null) view.lastPageButton.IsEnabled = false;
+            else view.lastPageButton.IsEnabled = true;
+
+            total = (int)json["pagination"]["pages"];
+
+            pixivIllust[] illust_before;
+
+            foreach (JObject response in json.Value<JArray>("response"))//actually will be only one
+            {
+                illust_before = new pixivIllust[response.Value<JArray>("works").Count];
+                int count = 0;
+
+
+                foreach (JObject works in response.Value<JArray>("works"))
+                {//TODO: try to put it in a task
+                    JObject work = works.Value<JObject>("work");
+
+                    if (work["id"].Type == JTokenType.Null) continue;
+                    if (!showR18)
+                    {
+                        if (!work["age_limit"].ToString().Equals("all-age")) continue;
+                    }
+                    illust_before[count] = new pixivIllust();
+                    illust_before[count].illustID = (string)work["id"];
+                    illust_before[count].titleName = (string)work["title"];
+                    illust_before[count].authorID = (string)work["user"]["id"];
+                    illust_before[count].authorName = (string)work["user"]["name"];
+                    illust_before[count].FavNum = (int)works["rank"];
+
+                    illust_before[count].ageLimit = false;
+                    if (!work["age_limit"].ToString().Equals("all-age")) illust_before[count].ageLimit = true;
+
+                    if (work["stats"].Type != JTokenType.Null && work["stats"].HasValues)
+                        illust_before[count].Scores = (int)work["stats"]["score"];
+
+                    //TODO:set Type
+
+                    illust_before[count].MediumURL = new List<string>();
+                    illust_before[count].MediumURL.Add((string)work["image_urls"]["px_480mw"]);
+                    illust_before[count].isSetComplete = true;
+
+                    //int order = count;//old is to commit series of tasks, but it is too slow and full of unexpected
+                    //var task = Task.Run(() =>
+                    //  {
+                    //      JObject json_illust = null;
+                    //      try {
+                    //          json_illust = pixivAPI.illust_work(illust_before[order].illustID);
+                    //      }
+                    //      catch
+                    //      {
+                    //          return;
+                    //      }
+                    //      if (json_illust == null) return;
+
+                    //      //use as illust_before[order]
+
+                    //      fromJsonSetIllust_detail(json_illust, illust_before, order);
+
+                    //      illust_before[order].isSetComplete = true;
+
+                    //  }, CancelTokenSource.Token);
+                    //try {
+                    //    await task;
+                    //}
+                    //catch(Exception ex)
+                    //{
+                    //    Debug.WriteLine(ex);
+                    //    illust = recover_listitems(illust_before);
+                    //    ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
+                    //    except_return("User cancelled actions.");
+                    //    return;
+                    //}
+
+
+                    count++;
+                }
+                illust = recover_listitems(illust_before);//old method, actually not needed
+            }
+        }
+        public async void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+            setSettings();
+            if (((MainWindow)App.Current.MainWindow).pixivAPI == null)
+            {
+                view.IsEnabled = false;
+                return;
+            }
+            pixivAPI = ((MainWindow)App.Current.MainWindow).pixivAPI;
+
+            if (!first_init) return;
+            first_init = false;
+            processing = true;
+            view.IsEnabled = false;
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
+            progressbar.Visibility = Visibility.Visible;
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
+
+            CancelTokenSource = new CancellationTokenSource();
+            try
+            {
+                await listview_load(1, 50);
+            }
+            catch
+            {
+                except_return("User cancelled actions.");
+                view.IsEnabled = true;
+                view.nextPageButton.IsEnabled = false;
+                view.lastPageButton.IsEnabled = false;
+
+                cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+                processing = false;
+                return;
+            }
+            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
+
+            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
+            except_return("Done");
+            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
+            processing = false;
+        }
+        private void except_return(string except)
+        {
+            if (except != null) statusLabel.Dispatcher.Invoke(() =>
+            {
+                statusLabel.Visibility = Visibility.Visible;
+                statusLabel.Content = "Status: " + except;
+            });
+            progressbar.Dispatcher.Invoke(() =>
+            {
+                progressbar.Visibility = Visibility.Hidden;
+            });
+            view.Dispatcher.Invoke(() =>
+            {
+                view.IsEnabled = true;
+            });
+            Thread label_hide = new Thread(() =>
+            {
+                Thread.Sleep(5000);
+                try
+                {
+                    statusLabel.Dispatcher.Invoke(() =>
+                    {
+                        statusLabel.Visibility = Visibility.Hidden;
+                    });
+                }
+                catch
+                {
+
+                }
+            });
+            label_hide.Start();
+        }
+        private pixivIllust[] recover_listitems(pixivIllust[] illust_before)
+        {
+            if (illust_before == null) return null;
+            List<pixivIllust> result_list = new List<pixivIllust>();
+            foreach (pixivIllust x in illust_before)
+            {
+                if (x == null) continue;
+                if (!x.isSetComplete) continue;
+                result_list.Add(x);
+            }
+            return result_list.ToArray();
+        }
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+
+        }
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (processing)
+            {
+                CancelTokenSource.Cancel();
+                CancelTokenSource.Dispose();
+                processing = false;
+            }
+            else
+            {
+                refresh();
+            }
+        }
+        private ConfigSettings configsetting;
+        private bool showR18;
+        private void setSettings()
+        {
+            configsetting = ((MainWindow)App.Current.MainWindow).configsettings;
+            if (configsetting == null)
+            {
+                configsetting = new ConfigSettings();
+                ((MainWindow)App.Current.MainWindow).configsettings = configsetting;
+            }
+            showR18 = configsetting.showR18;
+
+        }
+
+    }
+}

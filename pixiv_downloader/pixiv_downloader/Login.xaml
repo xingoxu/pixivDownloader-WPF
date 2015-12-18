@@ -1,0 +1,33 @@
+﻿<mui:ModernWindow x:Class="pixiv_downloader.Login"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  mc:Ignorable="d"
+                  Title="登陆到pixiv.net"
+                  Style="{StaticResource BlankWindow}" Width="350" Height="247.573" ResizeMode="NoResize">
+    <Grid>
+        <Grid x:Name="grid">
+            <mui:ModernButton x:Name="closeButton" Content="关闭" IconData="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z " Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="63" Margin="10,0,0,10" Click="closeButton_Click" />
+            <TextBox x:Name="usernameTextBox" Height="23" Margin="131,89,93,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <PasswordBox x:Name="passwordTextBox" Margin="131,134,93,0" VerticalAlignment="Top"/>
+            <Label x:Name="label" Content="用户名：" HorizontalAlignment="Left" Margin="78,93,0,0" VerticalAlignment="Top" Height="19"/>
+            <Label x:Name="label1" Content="密　码：" HorizontalAlignment="Left" Height="19" Margin="78,137,0,0" VerticalAlignment="Top" Width="48"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="61" Margin="92,10,0,0" VerticalAlignment="Top" Width="173" Source="img/pixivlogo.png"/>
+            <CheckBox x:Name="savepasswordCheckBox" Content="保存密码" HorizontalAlignment="Left" Margin="78,168,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="showR18CheckBox" Content="我已年满18岁" HorizontalAlignment="Left" Margin="172,168,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="error" Content="密码有误或出现网络错误，请尝试重试" HorizontalAlignment="Center" Margin="0,70,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Hidden"/>
+            <mui:BBCodeBlock Height="19" Margin="256,93,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="78">
+                [url=https://www.secure.pixiv.net/signup.php]没有账号？[/url]
+            </mui:BBCodeBlock>
+            <mui:BBCodeBlock Height="19" Margin="0,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
+                请您在使用前阅读[url=http://www.pixiv.net/terms/?page=term]pixiv使用条款[/url]
+            </mui:BBCodeBlock>
+
+        </Grid>
+        <mui:ModernButton x:Name="loginButton" Content="登陆" IconData="F1 M 19.0002,34L 19.0002,42L 43.7502,42L 33.7502,52L 44.2502,52L 58.2502,38L 44.2502,24L 33.7502,24L 43.7502,34L 19.0002,34 Z " Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="63" Margin="0,0,10,10" Click="loginButton_Click" />
+        <mui:ModernProgressRing x:Name="progressring" IsActive="False" Width="80" Height="80" Style="{StaticResource WaveProgressRingStyle}" />
+
+    </Grid>
+</mui:ModernWindow>

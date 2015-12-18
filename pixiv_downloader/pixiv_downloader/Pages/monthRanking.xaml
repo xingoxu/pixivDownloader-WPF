@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="pixiv_downloader.Pages.monthRanking"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:content="clr-namespace:pixiv_downloader.Contents"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid Margin="{StaticResource RootMargin}">
+            <Label x:Name="statusLabel" Content="Status: Done" Height="16" VerticalAlignment="Bottom" Margin="42,0,16,0" Visibility="Hidden"/>
+        </Grid>
+        <Grid>
+            <ProgressBar x:Name="progressbar" Minimum="0" Maximum="1" Height="20" IsIndeterminate="True" VerticalAlignment="Top" Margin="0,0,20,0"/>
+            <content:picViewSplit x:Name="view"/>
+            <Button x:Name="cancelButton" Content="Button" HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" BorderBrush="{x:Null}" Click="cancelButton_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

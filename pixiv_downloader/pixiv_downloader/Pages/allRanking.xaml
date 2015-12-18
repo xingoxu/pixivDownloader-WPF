@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="pixiv_downloader.Pages.allRanking"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:content="clr-namespace:pixiv_downloader.Contents"
+             mc:Ignorable="d" 
+             d:DesignHeight="360.017" d:DesignWidth="559.019">
+    <Grid>
+        <Grid Margin="{StaticResource RootMargin}">
+            <Label x:Name="statusLabel" Content="Status: Done" Height="16" VerticalAlignment="Bottom" Margin="42,0,16,0" Visibility="Hidden"/>
+        </Grid>
+        <Grid>
+            <ProgressBar x:Name="progressbar" Minimum="0" Maximum="1" Height="30" IsIndeterminate="True" VerticalAlignment="Top" Margin="0,0,189,0"/>
+            <content:picViewSplit x:Name="view" Margin="0,10,0,0"/>
+            <Button x:Name="cancelButton" Content="Button" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" BorderBrush="{x:Null}" Click="cancelButton_Click" Margin="0,0,167,0"/>
+            <ComboBox x:Name="comboBox" Margin="0,0,87,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right" Width="80" SelectionChanged="comboBox_SelectionChanged">
+                <ComboBoxItem Content="日"/>
+                <ComboBoxItem Content="本周"/>
+                <ComboBoxItem Content="本月" />
+                <ComboBoxItem Content="今日新人"/>
+                <ComboBoxItem Content="今日原创"/>
+                <ComboBoxItem Content="今日男性"/>
+                <ComboBoxItem Content="今日女性"/>
+                <ComboBoxItem Content="今日R18"/>
+                <ComboBoxItem Content="本周R18"/>
+                <ComboBoxItem Content="今日男性R18"/>
+                <ComboBoxItem Content="今日女性R18"/>
+                <ComboBoxItem Content="R18G"/>
+                <ComboBoxItem IsEnabled="False" Content="选中后刷新即可" />
+            </ComboBox>
+            <DatePicker x:Name="datepicker" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" SelectedDateChanged="datepicker_SelectedDateChanged" Width="87"/>
+        </Grid>
+    </Grid>
+
+</UserControl>
