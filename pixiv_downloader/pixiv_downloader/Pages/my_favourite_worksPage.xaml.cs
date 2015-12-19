@@ -52,7 +52,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page - 1, 20);
+                await listview_load(page - 1, 50);
             }
             catch
             {
@@ -85,7 +85,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page + 1, 20);
+                await listview_load(page + 1, 50);
             }
             catch
             {
@@ -125,7 +125,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page, 20);
+                await listview_load(page, 50);
             }
             catch
             {
@@ -237,7 +237,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(1, 20);
+                await listview_load(1, 50);
             }
             catch
             {

@@ -49,7 +49,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page - 1, 20);
+                await listview_load(page - 1, 30);
             }
             catch
             {
@@ -82,7 +82,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page + 1, 20);
+                await listview_load(page + 1, 30);
             }
             catch
             {
@@ -122,7 +122,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page, 20);
+                await listview_load(page, 30);
             }
             catch
             {
@@ -242,7 +242,7 @@ namespace pixiv_downloader.Pages
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(1, 20);
+                await listview_load(1, 30);
             }
             catch
             {
@@ -279,7 +279,7 @@ namespace pixiv_downloader.Pages
             });
             Thread label_hide = new Thread(() =>
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(3000);
                 try
                 {
                     statusLabel.Dispatcher.Invoke(() =>

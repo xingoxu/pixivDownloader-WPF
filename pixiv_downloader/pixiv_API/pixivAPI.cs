@@ -121,7 +121,7 @@ namespace pixiv_API
         {
             return user_profileAsync(user_id).Result;
         }
-        public async Task<JObject> user_profileAsync(string user_id,CancellationTokenSource cancellationtokensource=null)
+        public async Task<JObject> user_profileAsync(string user_id, CancellationTokenSource cancellationtokensource = null)
         {
             string url = "https://public-api.secure.pixiv.net/v1/users/" + user_id + ".json";
             var parameters = new Dictionary<string, object>(){
@@ -180,11 +180,11 @@ namespace pixiv_API
 
             return JObject.Parse(task.Result.Content.ReadAsStringAsync().Result);
         }
-        public JObject my_following_works(int page, int per_page, bool include_stats = true, bool include_sanity_level = true)//关注的人的新作品
+        public JObject my_following_works(int page = 1, int per_page = 30, bool include_stats = true, bool include_sanity_level = true)//关注的人的新作品
         {
             return my_following_worksAsync(page, per_page, include_stats, include_sanity_level).Result;
         }
-        public async Task<JObject> my_following_worksAsync(int page, int per_page, bool include_stats = true, bool include_sanity_level = true, CancellationTokenSource cancellationtokensource = null)//关注的人的新作品
+        public async Task<JObject> my_following_worksAsync(int page = 1, int per_page = 30, bool include_stats = true, bool include_sanity_level = true, CancellationTokenSource cancellationtokensource = null)//关注的人的新作品
         {
             string url = "https://public-api.secure.pixiv.net/v1/me/following/works.json";
             var parameters = new Dictionary<string, object>{
@@ -214,11 +214,11 @@ namespace pixiv_API
 
             return JObject.Parse(http.Content.ReadAsStringAsync().Result);
         }
-        public JObject my_favourite_works(int page, int per_page, bool IsPublic)//收藏夹作品
+        public JObject my_favourite_works(int page = 1, int per_page = 50, bool IsPublic = true)//收藏夹作品
         {
             return my_favourite_worksAsync(page, per_page, IsPublic).Result;
         }
-        public async Task<JObject> my_favourite_worksAsync(int page, int per_page, bool IsPublic, CancellationTokenSource cancellationTokenSource = null)//收藏夹作品
+        public async Task<JObject> my_favourite_worksAsync(int page = 1, int per_page = 50, bool IsPublic = true, CancellationTokenSource cancellationTokenSource = null)//收藏夹作品
         {
             string url = "https://public-api.secure.pixiv.net/v1/me/favorite_works.json";
             string publicity = "private";
@@ -309,11 +309,11 @@ namespace pixiv_API
 
             return true;
         }
-        public JObject my_following_user(int page, int per_page, bool IsPublic)
+        public JObject my_following_user(int page=1, int per_page=30, bool IsPublic=true)
         {
             return my_following_userAsync(page, per_page, IsPublic).Result;
         }
-        public async Task<JObject> my_following_userAsync(int page, int per_page, bool IsPublic, CancellationTokenSource cancellationtokensource = null)
+        public async Task<JObject> my_following_userAsync(int page=1, int per_page=30, bool IsPublic=true, CancellationTokenSource cancellationtokensource = null)
         {
             string url = "https://public-api.secure.pixiv.net/v1/me/following.json";
             string publicity = "private";
@@ -449,11 +449,11 @@ namespace pixiv_API
 
             return true;
         }
-        public JObject user_works(string user_id, int page, int per_page, bool include_stats = true, bool include_sanity_level = true)
+        public JObject user_works(string user_id, int page = 1, int per_page = 30, bool include_stats = true, bool include_sanity_level = true)
         {
             return user_worksAsync(user_id, page, per_page, include_stats, include_sanity_level).Result;
         }
-        public async Task<JObject> user_worksAsync(string user_id, int page, int per_page, bool include_stats = true, bool include_sanity_level = true, CancellationTokenSource cancellationtokensource = null)
+        public async Task<JObject> user_worksAsync(string user_id, int page = 1, int per_page = 30, bool include_stats = true, bool include_sanity_level = true, CancellationTokenSource cancellationtokensource = null)
         {
             string url = string.Format("https://public-api.secure.pixiv.net/v1/users/{0}/works.json", user_id);
 
@@ -487,7 +487,7 @@ namespace pixiv_API
         {
             return user_favourite_worksAsync(user_id, page, per_page).Result;
         }
-        public async Task<JObject> user_favourite_worksAsync(string user_id, int page, int per_page, CancellationTokenSource cancellationtokensource = null)
+        public async Task<JObject> user_favourite_worksAsync(string user_id, int page = 1, int per_page = 30, CancellationTokenSource cancellationtokensource = null)
         {
             string url = string.Format("https://public-api.secure.pixiv.net/v1/users/{0}/favorite_works.json", user_id);
 
@@ -547,7 +547,7 @@ namespace pixiv_API
 
             return JObject.Parse(task.Result.Content.ReadAsStringAsync().Result);
         }
-        public JObject user_following_users(string user_id, int page, int per_page)
+        public JObject user_following_users(string user_id, int page=1, int per_page=30)
         {
             string url = string.Format("https://public-api.secure.pixiv.net/v1/users/{0}/following.json", user_id);
             var parameters = new Dictionary<string, object>()
@@ -567,7 +567,7 @@ namespace pixiv_API
             return JObject.Parse(task.Result.Content.ReadAsStringAsync().Result);
         }
 
-        public JObject ranking(string ranking_type, string mode, int page, int per_page, string date)
+        public JObject ranking(string ranking_type, string mode, int page = 1, int per_page = 50, string date = null)
         {
             return rankingAsync(ranking_type, mode, page, per_page, date).Result;
         }
@@ -614,7 +614,7 @@ namespace pixiv_API
 
             return JObject.Parse(http.Content.ReadAsStringAsync().Result);
         }
-        public JObject search_works(string query, int page, int per_page, string mode = "text", string period = "all", string order = "desc", string sort = "date", bool include_stats = true, bool include_sanity_level = true, bool show_r18 = true)
+        public JObject search_works(string query, int page = 1, int per_page = 30, string mode = "text", string period = "all", string order = "desc", string sort = "date", bool include_stats = true, bool include_sanity_level = true, bool show_r18 = true)
         {
             return search_worksAsync(query, page, per_page, mode, period, order, sort, include_stats, include_sanity_level, show_r18).Result;
         }
@@ -630,7 +630,7 @@ namespace pixiv_API
         /// <param name="sort">just "date"</param>
         /// <param name="show_r18">true or false</param>
         /// <returns></returns>
-        public async Task<JObject> search_worksAsync(string query, int page, int per_page, string mode = "text", string period = "all", string order = "desc", string sort = "date", bool include_stats = true, bool include_sanity_level = true, bool show_r18 = true, CancellationTokenSource cancellationtokensource = null)
+        public async Task<JObject> search_worksAsync(string query, int page=1, int per_page=30, string mode = "text", string period = "all", string order = "desc", string sort = "date", bool include_stats = true, bool include_sanity_level = true, bool show_r18 = true, CancellationTokenSource cancellationtokensource = null)
         {
             string url = "https://public-api.secure.pixiv.net/v1/search/works.json";
             int r18 = 0;

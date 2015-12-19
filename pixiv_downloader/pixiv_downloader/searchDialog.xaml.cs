@@ -36,7 +36,7 @@ namespace pixiv_downloader
             view.nextPageButton.Click += NextPageButton_Click;
             view.lastPageButton.Click += LastPageButton_Click;
         }
-        //per page:20(have to check it on phone)
+        //per page:30(have to check it on phone)
 
         private async void LastPageButton_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +50,7 @@ namespace pixiv_downloader
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page - 1, 20);
+                await listview_load(page - 1, 30);
             }
             catch
             {
@@ -83,7 +83,7 @@ namespace pixiv_downloader
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page + 1, 20);
+                await listview_load(page + 1, 30);
             }
             catch
             {
@@ -123,7 +123,7 @@ namespace pixiv_downloader
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page, 20);
+                await listview_load(page, 30);
             }
             catch
             {
@@ -237,7 +237,7 @@ namespace pixiv_downloader
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(1, 20);
+                await listview_load(1, 30);
             }
             catch
             {

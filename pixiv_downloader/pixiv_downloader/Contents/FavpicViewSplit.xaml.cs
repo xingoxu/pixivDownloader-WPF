@@ -38,7 +38,7 @@ namespace pixiv_downloader.Contents
             ((GridView)((ListView)view.piclistViewLeft.FindName("picListView")).View).Columns.RemoveAt(4);
             ((GridView)((ListView)view.piclistViewLeft.FindName("picListView")).View).Columns.RemoveAt(3);
         }
-        //per page:20(have to check it on phone)
+
 
         private async void LastPageButton_Click(object sender, RoutedEventArgs e)
         {
@@ -52,7 +52,7 @@ namespace pixiv_downloader.Contents
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page - 1, 20);
+                await listview_load(page - 1, 30);
             }
             catch
             {
@@ -85,7 +85,7 @@ namespace pixiv_downloader.Contents
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page + 1, 20);
+                await listview_load(page + 1, 30);
             }
             catch
             {
@@ -131,7 +131,7 @@ namespace pixiv_downloader.Contents
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page, 20);
+                await listview_load(page, 30);
             }
             catch
             {
@@ -260,7 +260,7 @@ namespace pixiv_downloader.Contents
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(1, 20);
+                await listview_load(1, 30);
             }
             catch
             {
