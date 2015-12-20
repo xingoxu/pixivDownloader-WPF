@@ -57,6 +57,21 @@ namespace pixiv_downloader
         {
             downloadTasks = ((MainWindow)App.Current.MainWindow).downloadTasks;
             ConfigSettings setting = ((MainWindow)App.Current.MainWindow).configsettings;
+            chooseRoute chooseRoutedlg = new chooseRoute();
+            chooseRoutedlg.FolderTextBox.Text = setting.workPath;
+            chooseRoutedlg.ShowDialog();
+            if (chooseRoutedlg.MessageBoxResult == MessageBoxResult.Cancel) return;
+            string workPath = null;
+            if ((bool)chooseRoutedlg.routeByselfCheckBox.IsChecked)//I found this name problem but I don't want to change it...
+            {
+                workPath = chooseRoutedlg.FolderTextBox.Text;
+            }
+            else
+            {
+                workPath = setting.workPath;
+            }
+            bool showchooseRoutedlg = (bool)chooseRoutedlg.remind.IsChecked;
+            //next update TODO
             if (picListView.SelectedItems.Count == 1)
             {
                 illustTask illusttask = new illustTask(mangaPage_selected, pixivAPI, illust.titleName + mangaPage_selected.Number.ToString(), illust, setting.workPath);

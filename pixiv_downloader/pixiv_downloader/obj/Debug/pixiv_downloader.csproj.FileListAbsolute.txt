@@ -27,8 +27,6 @@ C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\C
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\pixiv_downloader.g.resources
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\pixiv_downloader.exe
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\pixiv_downloader.pdb
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\dailyRanking.g.cs
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\dailyRanking.baml
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\followingWorks.g.cs
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\followingWorks.baml
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\bin\Debug\pixiv_API.dll
@@ -139,3 +137,33 @@ C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_downloader\obj\
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_downloader\obj\Debug\themes\userCustomLight.baml
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_downloader\obj\Debug\searchDialog.g.cs
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_downloader\obj\Debug\searchDialog.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_downloader\obj\Debug\chooseRoute.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_downloader\obj\Debug\chooseRoute.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\chooseRoute.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\newDownloadTaskDialog.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\SearchPage.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\Settings\pictureShowSettings.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\themes\snowflakes.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\themes\userCustomDark.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\themes\userCustomLight.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\authorDialog.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\chooseRoute.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\multiDownloadPageForMangaDialog.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\newDownloadTaskDialog.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\allRanking.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\illustRanking.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\mangaRanking.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\monthRanking.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\SearchPage.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\Settings\pictureShowSettings.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\ugoiraRanking.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\searchDialog.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\pixiv_downloader_Content.g.cs
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\authorDialog.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\multiDownloadPageForMangaDialog.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\allRanking.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\illustRanking.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\mangaRanking.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\monthRanking.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\Pages\ugoiraRanking.baml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_downloader\obj\Debug\searchDialog.baml

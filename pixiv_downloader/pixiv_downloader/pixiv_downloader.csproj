@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>www.ico.la_34ee0ff0732e0c4204f37a766a36b260_128X128.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FirstFloor.ModernUI, Version=1.0.6.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
@@ -66,6 +69,9 @@
     <Compile Include="AsyncObservableCollection.cs" />
     <Compile Include="authorDialog.xaml.cs">
       <DependentUpon>authorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="chooseRoute.xaml.cs">
+      <DependentUpon>chooseRoute.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigSettings.cs" />
     <Compile Include="Contents\authorIllustViewSplit.xaml.cs">
@@ -136,6 +142,10 @@
     </Compile>
     <Compile Include="XmlSerializer.cs" />
     <Page Include="authorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="chooseRoute.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -322,6 +332,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\snowflakes.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="www.ico.la_34ee0ff0732e0c4204f37a766a36b260_128X128.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

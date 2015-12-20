@@ -10,12 +10,23 @@
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="关于" Style="{StaticResource Heading2}" />
-                <TextBlock Text="Made by xingo" Margin="0,0,0,8" TextWrapping="Wrap" />
                 <TextBlock />
-                <mui:BBCodeBlock  xml:space="preserve">本软体不会向云端存储个人信息（包括用户名，密码），请您在使用本软体时按照[url=http://www.pixiv.net/terms/?page=term]pixiv使用条款[/url]进行使用。
+                <mui:BBCodeBlock  xml:space="preserve">Made by[url=https://blog.xingoxu.com]xingo[/url]
+Special thanks to:[url=http://blog.smdcn.net]SmdCn[/url]                    
+                </mui:BBCodeBlock>
+                <TextBlock />
+                <mui:BBCodeBlock  xml:space="preserve">本软体不会向云端存储任何个人信息（包括用户名，密码）
+
+请您在使用本软体时按照[url=http://www.pixiv.net/terms/?page=term]pixiv使用条款[/url]进行使用。
                     
-版本更新：[url=https://github.com/xingoxu/pixivDownloader-with-Windows-WPF]Github[/url]
+版本更新：[url=https://github.com/xingoxu/pixivDownloader-WPF]Github[/url]
 作者微博：[url=http://weibo.com/pokemonxu/]xingo[/url]
+                </mui:BBCodeBlock>
+                <TextBlock Text="References" Style="{StaticResource Heading2}" />
+                <TextBlock />
+                <mui:BBCodeBlock  xml:space="preserve">[url=https://github.com/firstfloorsoftware/mui]Modern UI for WPF[/url]
+[url=http://www.newtonsoft.com/json]Newtonsoft.Json[/url]
+[url=https://github.com/xingoxu/pixiv_API-c-]pixiv APIs in C#[/url]
                 </mui:BBCodeBlock>
             </StackPanel>
         </ScrollViewer>

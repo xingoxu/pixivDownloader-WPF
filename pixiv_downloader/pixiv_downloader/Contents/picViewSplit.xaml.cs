@@ -49,24 +49,24 @@ namespace pixiv_downloader.Contents
         {
             InitializeComponent();
             canceltoken = new CancellationTokenSource();
-            piclistview = (ListView)piclistViewLeft.FindName("picListView");
+            piclistview = (ListView)piclistViewLeft.picListView;
 
             piclistview.SelectionChanged += lv_SelectionChanged;
 
-            titleLabel = (Label)picAndButtonViewRight.FindName("titleLabel");
-            descriptionLabel = (Label)picAndButtonViewRight.FindName("descriptionLabel");
+            titleLabel = (Label)picAndButtonViewRight.titleLabel;
+            descriptionLabel = (Label)picAndButtonViewRight.descriptionLabel;
 
-            follow_button = (ModernButton)picAndButtonViewRight.FindName("follow_button");
+            follow_button = (ModernButton)picAndButtonViewRight.follow_button;
             follow_button.Click += Follow_button_Click;
 
-            illustType = (Label)picAndButtonViewRight.FindName("illustType");
-            createdDate = (Label)picAndButtonViewRight.FindName("createdDate");
-            image = (Image)picAndButtonViewRight.FindName("image");
+            illustType = (Label)picAndButtonViewRight.illustType;
+            createdDate = (Label)picAndButtonViewRight.createdDate;
+            image = (Image)picAndButtonViewRight.image;
 
-            favouriteButton = (Button)picAndButtonViewRight.FindName("favouriteButton");
+            favouriteButton = (Button)picAndButtonViewRight.favouriteButton;
             favouriteButton.Click += FavouriteButton_Click;
 
-            downloadButton = (Button)picAndButtonViewRight.FindName("downloadButton");
+            downloadButton = (Button)picAndButtonViewRight.downloadButton;
             downloadButton.Click += DownloadButton_Click;
 
             intoDownloadSelect = (Button)picAndButtonViewRight.intoDownloadSelect;
@@ -93,8 +93,9 @@ namespace pixiv_downloader.Contents
             multiDownloadPageForMangaDialog mangadownloaddlg = new multiDownloadPageForMangaDialog();
             mangadownloaddlg.MaxWidth = int.MaxValue;
             mangadownloaddlg.MaxHeight = int.MaxValue;
-            mangadownloaddlg.MinWidth = 500;
+            mangadownloaddlg.MinWidth = 700;
             mangadownloaddlg.MinHeight = 300;
+            mangadownloaddlg.Height = 300;
             mangadownloaddlg.init(illust_selected);
             mangadownloaddlg.ShowDialog();
         }
@@ -435,9 +436,24 @@ namespace pixiv_downloader.Contents
         {
             ConfigSettings setting = ((MainWindow)App.Current.MainWindow).configsettings;
             downloadTasks = ((MainWindow)App.Current.MainWindow).downloadTasks;
+            chooseRoute chooseRoutedlg = new chooseRoute();
+            chooseRoutedlg.FolderTextBox.Text = setting.workPath;
+            chooseRoutedlg.ShowDialog();
+            if (chooseRoutedlg.MessageBoxResult == MessageBoxResult.Cancel) return;
+            string workPath = null;
+            if ((bool)chooseRoutedlg.routeByselfCheckBox.IsChecked)//I found this name problem but I don't want to change it...
+            {
+                workPath = chooseRoutedlg.FolderTextBox.Text;
+            }
+            else
+            {
+                workPath = setting.workPath;
+            }
+            bool showchooseRoutedlg = (bool)chooseRoutedlg.remind.IsChecked;
+            //next update TODO
             if (piclistview.SelectedItems.Count == 1)
             {
-                illustTask illusttask = new illustTask(illust_selected, pixivAPI, setting.workPath);
+                illustTask illusttask = new illustTask(illust_selected, pixivAPI, workPath);
                 downloadTasks.Add(illusttask);
             }
             else if (piclistview.SelectedItems.Count > 1)
@@ -484,7 +500,7 @@ namespace pixiv_downloader.Contents
                               flag = true;
                               continue;
                           }
-                          illustTask illusttask = new illustTask(illust, pixivAPI,setting.workPath);
+                          illustTask illusttask = new illustTask(illust, pixivAPI,workPath);
                           downloadTasks.Add(illusttask);
 
                       }

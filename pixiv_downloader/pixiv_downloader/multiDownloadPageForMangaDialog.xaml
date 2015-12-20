@@ -39,7 +39,7 @@
         <ScrollViewer Grid.Column="2 " Margin="4,0,0,0">
             <StackPanel>
                 <Image x:Name="image" Height="{Binding Path=ActualWidth,ElementName=gridPanel}" Width="{Binding Path=ActualWidth,ElementName=gridPanel}" VerticalAlignment="Top" />
-                <Grid Height="220" >
+                <Grid Height="130" >
                     <ProgressBar x:Name="progressbar" Minimum="0" Maximum="1" Height="15" IsIndeterminate="True" VerticalAlignment="Top" Visibility="Hidden"/>
                     <Button x:Name="downloadButton" Content="下载" Margin="0,70,0,0" HorizontalAlignment="Center" IsEnabled="False" Height="35" Width="90" VerticalAlignment="Top"/>
                     <Label x:Name="illustType" Content="尚未选择项" Margin="0,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
