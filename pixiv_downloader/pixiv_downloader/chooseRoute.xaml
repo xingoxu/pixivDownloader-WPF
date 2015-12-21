@@ -17,6 +17,6 @@
             <RadioButton GroupName="route" x:Name="routeBySystem" Content="默认设定路径" HorizontalAlignment="Left" Click="routeBySystem_Click"/>
         </StackPanel>
         <TextBlock />
-        <CheckBox x:Name="remind" Content="记住本次设定，以后不再询问我（此功能未生效）"/>
+        <CheckBox x:Name="remind" Content="记住本次设定，以后不再询问我"/>
     </StackPanel>
 </mui:ModernDialog>

@@ -6,7 +6,7 @@
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                   mc:Ignorable="d"
                   Title="登陆到pixiv.net"
-                  Style="{StaticResource BlankWindow}" Width="350" Height="247.573" ResizeMode="NoResize">
+                  Style="{StaticResource BlankWindow}" Width="350" Height="269.073" ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="grid">
             <mui:ModernButton x:Name="closeButton" Content="关闭" IconData="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z " Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="63" Margin="10,0,0,10" Click="closeButton_Click" />
@@ -24,7 +24,9 @@
             <mui:BBCodeBlock Height="19" Margin="0,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
                 请您在使用前阅读[url=http://www.pixiv.net/terms/?page=term]pixiv使用条款[/url]
             </mui:BBCodeBlock>
-
+            <mui:BBCodeBlock Height="19" Margin="0,215,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
+                （特别注意规定第四条）
+            </mui:BBCodeBlock>
         </Grid>
         <mui:ModernButton x:Name="loginButton" Content="登陆" IconData="F1 M 19.0002,34L 19.0002,42L 43.7502,42L 33.7502,52L 44.2502,52L 58.2502,38L 44.2502,24L 33.7502,24L 43.7502,34L 19.0002,34 Z " Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="63" Margin="0,0,10,10" Click="loginButton_Click" />
         <mui:ModernProgressRing x:Name="progressring" IsActive="False" Width="80" Height="80" Style="{StaticResource WaveProgressRingStyle}" />

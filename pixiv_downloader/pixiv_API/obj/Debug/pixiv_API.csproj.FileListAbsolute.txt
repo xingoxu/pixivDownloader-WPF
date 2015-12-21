@@ -5,13 +5,6 @@ C:\Users\xingo\Desktop\20134834135\pixiv_demo\pixiv_API\bin\Debug\Newtonsoft.Jso
 C:\Users\xingo\Desktop\20134834135\pixiv_demo\pixiv_API\obj\Debug\pixiv_API.csprojResolveAssemblyReference.cache
 C:\Users\xingo\Desktop\20134834135\pixiv_demo\pixiv_API\obj\Debug\pixiv_API.dll
 C:\Users\xingo\Desktop\20134834135\pixiv_demo\pixiv_API\obj\Debug\pixiv_API.pdb
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\obj\Debug\pixiv_API.csprojResolveAssemblyReference.cache
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\obj\Debug\pixiv_API.dll
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\obj\Debug\pixiv_API.pdb
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\pixiv_API.dll
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\pixiv_API.pdb
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\Newtonsoft.Json.dll
-C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\Newtonsoft.Json.xml
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_API\bin\Debug\pixiv_API.dll
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_API\bin\Debug\pixiv_API.pdb
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_API\bin\Debug\Newtonsoft.Json.dll
@@ -19,3 +12,10 @@ C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_API\bin\Debug\N
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_API\obj\Debug\pixiv_API.csprojResolveAssemblyReference.cache
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_API\obj\Debug\pixiv_API.dll
 C:\Users\xingo\Desktop\20134834135\pixiv_downloader - Copy\pixiv_API\obj\Debug\pixiv_API.pdb
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\pixiv_API.dll
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\pixiv_API.pdb
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\Newtonsoft.Json.dll
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\bin\Debug\Newtonsoft.Json.xml
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\obj\Debug\pixiv_API.csprojResolveAssemblyReference.cache
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\obj\Debug\pixiv_API.dll
+C:\Users\xingo\Desktop\20134834135\pixiv_downloader\pixiv_API\obj\Debug\pixiv_API.pdb

@@ -202,29 +202,7 @@ namespace pixiv_downloader
 
             if (File.Exists("Config.xml")) File.Delete("Config.xml");
 
-            XmlSerializer.SaveToXml("temp.xml", configsettings, typeof(ConfigSettings), "ConfigSettings");
-
-            XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load("temp.xml");
-
-            xmldoc.DocumentElement.RemoveAttribute("xmlns:xsd");
-            XmlAttribute attribute = xmldoc.CreateAttribute("xsi", "noNamespaceSchemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
-            attribute.Value = "config.xsd";
-            xmldoc.DocumentElement.Attributes.Append(attribute);
-
-            XmlDocument xmldoc2 = new XmlDocument();
-            XmlDeclaration xd = xmldoc2.CreateXmlDeclaration("1.0", "UTF-8", null);
-            XmlProcessingInstruction xi = xmldoc2.CreateProcessingInstruction("xml-stylesheet", @"type=""text/xsl"" href=""config.xsl""");
-            XmlDocumentType doctype = xmldoc2.CreateDocumentType("ConfigSetting", null, "config.dtd", null);
-            XmlNode rootnode = xmldoc2.ImportNode(xmldoc.DocumentElement.Clone(), true);
-
-            xmldoc2.AppendChild(xd);
-            xmldoc2.AppendChild(xi);
-            xmldoc2.AppendChild(doctype);
-            xmldoc2.AppendChild(rootnode);
-            xmldoc2.Save("Config.xml");
-
-            File.Delete("temp.xml");
+            XmlSerializer.SaveToXml("Config.xml", configsettings, typeof(ConfigSettings), "ConfigSettings");
 
         }
 
@@ -233,7 +211,7 @@ namespace pixiv_downloader
             if(configsettings.AutoSavedTasks!=null && configsettings.AutoSavedTasks.Count > 0)
             {
                 var result = ModernDialog.ShowMessage("发现上次没有下载完的任务，是否加载入下载管理？\n如您选择否，任务仍然保留在配置文件中\n（加载需要重新解析，可能会失败，提醒您注意备份Config.xml）", "自动恢复下载任务提醒", MessageBoxButton.YesNo);
-                if (result != MessageBoxResult.OK) return;
+                if (result != MessageBoxResult.Yes) return;
                 waitingForProcessing waitDialog = new waitingForProcessing();
                 int total = configsettings.AutoSavedTasks.Count;
                 waitDialog.progressbar.Maximum = total;

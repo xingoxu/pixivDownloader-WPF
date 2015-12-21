@@ -34,6 +34,9 @@ namespace pixiv_downloader
         public bool autoSaveTask { get; set; }
         [XmlArray]
         public List<ExportTask> AutoSavedTasks { get; set; }
+        private bool showdownloaddlg = true;
+        [XmlElement]
+        public bool showDownloadDialog { get { return showdownloaddlg; }  set { showdownloaddlg = value; } }
 
     }
     [Serializable]

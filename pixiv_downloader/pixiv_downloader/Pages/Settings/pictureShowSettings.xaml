@@ -15,6 +15,7 @@
                 <TextBlock Text="个人设置" Style="{StaticResource Heading2}" />
                 <CheckBox x:Name="savePassWord" Content="保存密码" Click="savePassWord_Click"/>
                 <CheckBox x:Name="autoSaveTask" Content="退出时自动保存没有下载完成的任务" Click="autoSaveTask_Click" />
+                <CheckBox x:Name="showDownloadDialog" Content="下载前显示确认对话框" Click="showDownloadDialog_Click" />
                 <TextBlock />
                 <TextBlock Text="下载设置" Style="{StaticResource Heading2}"/>
                 <StackPanel Orientation="Horizontal" >

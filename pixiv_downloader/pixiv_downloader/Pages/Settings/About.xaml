@@ -17,7 +17,8 @@ Special thanks to:[url=http://blog.smdcn.net]SmdCn[/url]
                 <TextBlock />
                 <mui:BBCodeBlock  xml:space="preserve">本软体不会向云端存储任何个人信息（包括用户名，密码）
 
-请您在使用本软体时按照[url=http://www.pixiv.net/terms/?page=term]pixiv使用条款[/url]进行使用。
+请您在使用本软体时按照[url=http://www.pixiv.net/terms/?page=term]pixiv使用条款[/url]进行使用。（特别注意规定第四条）
+本软体中出现的pixiv商标均归pixiv株式会社所拥有，所有内容均来源于pixiv.net，本软体完全免费，因此本人不对此软体的任何内容负责，包括但不限于商标，背景，出现的作品信息等。
                     
 版本更新：[url=https://github.com/xingoxu/pixivDownloader-WPF]Github[/url]
 作者微博：[url=http://weibo.com/pokemonxu/]xingo[/url]

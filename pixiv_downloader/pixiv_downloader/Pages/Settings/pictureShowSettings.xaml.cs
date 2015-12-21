@@ -42,6 +42,7 @@ namespace pixiv_downloader.Pages.Settings
             showR18.IsChecked = configsetting.showR18;
             savePassWord.IsChecked = configsetting.savePassword;
             autoSaveTask.IsChecked = configsetting.autoSaveTask;
+            showDownloadDialog.IsChecked = configsetting.showDownloadDialog;
             FolderTextBox.Text = configsetting.workPath;
         }
 
@@ -78,6 +79,11 @@ namespace pixiv_downloader.Pages.Settings
                 FolderTextBox.Text = folderbrowserdialog.SelectedPath;
                 if (FolderTextBox.Text != "") configsetting.workPath = FolderTextBox.Text;
             }
+        }
+
+        private void showDownloadDialog_Click(object sender, RoutedEventArgs e)
+        {
+            configsetting.showDownloadDialog = (bool)showDownloadDialog.IsChecked;
         }
     }
 }
