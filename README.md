@@ -18,9 +18,9 @@
 
 ## Screenshots:  
 
-![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture.PNG)  
-![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture2.PNG)   
-![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture3.PNG)  
+![](https://dn-xingoxu.qbox.me/works/pixivDownloader/screenshots/Capture.PNG)  
+![](https://dn-xingoxu.qbox.me/works/pixivDownloader/screenshots/Capture2.PNG)   
+![](https://dn-xingoxu.qbox.me/works/pixivDownloader/screenshots/Capture3.PNG)  
 ![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture4.PNG)  
 ![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture5.PNG)  
 ![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture6.PNG)  
