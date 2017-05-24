@@ -18,13 +18,13 @@
 
 ## Screenshots:  
 
-![](https://dn-xingoxu.qbox.me/works/pixivDownloader/screenshots/Capture.PNG)  
-![](https://dn-xingoxu.qbox.me/works/pixivDownloader/screenshots/Capture2.PNG)   
-![](https://dn-xingoxu.qbox.me/works/pixivDownloader/screenshots/Capture3.PNG)  
-![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture4.PNG)  
-![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture5.PNG)  
-![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture6.PNG)  
-![](https://dn-xingoxu.qbox.me/pixivDownloader/screenshots/Capture7.PNG)  
+![Capture.PNG](https://ooo.0o0.ooo/2017/05/24/59252d88705c1.png)
+![Capture2.PNG](https://ooo.0o0.ooo/2017/05/24/59252d927f9dd.png)
+![Capture3.PNG](https://ooo.0o0.ooo/2017/05/24/59252d9256e76.png)
+![Capture4.PNG](https://ooo.0o0.ooo/2017/05/24/59252d8c97c55.png)
+![Capture5.PNG](https://ooo.0o0.ooo/2017/05/24/59252d8ebe23a.png)
+![Capture6.PNG](https://ooo.0o0.ooo/2017/05/24/59252d9125452.png)
+![Capture7.PNG](https://ooo.0o0.ooo/2017/05/24/59252d929d187.png)
 
 PS: 除非遇到重大问题，基本不会更新。  
   
