@@ -49,6 +49,7 @@ namespace pixiv_downloader
             //show setting on loginwindow
             if (configsettings.PassWord != null) loginwindow.passwordTextBox.Password = Decrypt(configsettings.PassWord);
             if (configsettings.UserName != null) loginwindow.usernameTextBox.Text = configsettings.UserName;
+            if (configsettings.refresh_token != null) loginwindow.refresh_token = Decrypt(configsettings.refresh_token);
             loginwindow.savepasswordCheckBox.IsChecked = configsettings.savePassword;
             loginwindow.showR18CheckBox.IsChecked = configsettings.showR18;
 
@@ -66,6 +67,7 @@ namespace pixiv_downloader
                 {
                     configsettings.UserName = loginwindow.usernameTextBox.Text;
                     configsettings.PassWord = Encrypt(loginwindow.passwordTextBox.Password);
+                    configsettings.refresh_token = Encrypt(loginwindow.refresh_token);
                 }
                 else
                 {

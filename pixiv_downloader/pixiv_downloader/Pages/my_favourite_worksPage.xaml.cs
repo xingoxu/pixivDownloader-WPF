@@ -27,79 +27,43 @@ namespace pixiv_downloader.Pages
     {
 
         private pixiv_API.pixivAPI pixivAPI;
-        private pixivIllust[] illust;
+        private pixivIllust[] illust = new pixivIllust[0];
         public my_favourite_worksPage()
         {
             InitializeComponent();
-            page = 1;
             first_init = true;
+            view.lastPageButton.Visibility = Visibility.Hidden;
+            view.nextPageButton.Content = "加载更多";
+            view.nextPageButton.Width = 85;
+            view.pageLabel.Visibility = Visibility.Hidden;
             view.nextPageButton.Click += NextPageButton_Click;
-            view.lastPageButton.Click += LastPageButton_Click;
             ((GridView)((ListView)view.piclistViewLeft.FindName("picListView")).View).Columns.RemoveAt(4);
             ((GridView)((ListView)view.piclistViewLeft.FindName("picListView")).View).Columns.RemoveAt(3);
         }
-        //per page:20(have to check it on phone)
-
-        private async void LastPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (page == 1) return;
-            processing = true;
-            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
-            view.IsEnabled = false;
-            progressbar.Visibility = Visibility.Visible;
-            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
-
-            CancelTokenSource = new CancellationTokenSource();
-            try
-            {
-                await listview_load(page - 1, 50);
-            }
-            catch
-            {
-                except_return("User cancelled actions.");
-                view.IsEnabled = true;
-                view.nextPageButton.IsEnabled = false;
-                view.lastPageButton.IsEnabled = false;
-
-                cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
-                processing = false;
-                return;
-            }
-            page--;
-            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
-
-            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
-            except_return("Done");
-            cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
-            processing = false;
-        }
-
         private async void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
             processing = true;
             cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
             view.IsEnabled = false;
             progressbar.Visibility = Visibility.Visible;
-            ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
+            //((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
 
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page + 1, 50);
+                await listview_load();
             }
             catch
             {
                 except_return("User cancelled actions.");
                 view.IsEnabled = true;
                 view.nextPageButton.IsEnabled = false;
-                view.lastPageButton.IsEnabled = false;
 
                 cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
                 processing = false;
                 return;
             }
-            page++;
-            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
+
             ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
             except_return("Done");
             cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
@@ -117,37 +81,39 @@ namespace pixiv_downloader.Pages
                 pixivAPI = ((MainWindow)App.Current.MainWindow).pixivAPI;
             }
             processing = true;
+            this.next_url = null;
             cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
             view.IsEnabled = false;
             progressbar.Visibility = Visibility.Visible;
             ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
+            illust = new pixivIllust[0];
 
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(page, 50);
+                await listview_load();
             }
             catch
             {
                 except_return("User cancelled actions.");
                 view.IsEnabled = true;
                 view.nextPageButton.IsEnabled = false;
-                view.lastPageButton.IsEnabled = false;
 
                 cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
                 processing = false;
                 return;
             }
 
-            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
+
             ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
             except_return("Done");
             cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
             processing = false;
         }
         private bool first_init;
-        private int page;
-        private int total;
+
+        private string next_url;
+
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
 
@@ -159,13 +125,13 @@ namespace pixiv_downloader.Pages
         }
         private CancellationTokenSource CancelTokenSource;
         private bool processing;
-        private async Task listview_load(int page, int per_page)
+        private async Task listview_load()
         {
             CancelTokenSource = new CancellationTokenSource();
             JObject json = null;
             try
             {
-                json = await pixivAPI.my_favourite_worksAsync(page, per_page, (bool)isPublicCheckBox.IsChecked, CancelTokenSource);
+                json = await pixivAPI.my_favourite_worksAsync(this.next_url, (bool)isPublicCheckBox.IsChecked, CancelTokenSource);
             }
             catch (Exception ex)
             {
@@ -179,24 +145,16 @@ namespace pixiv_downloader.Pages
             }
 
             //set next and last button
-            if (json["pagination"]["next"].Type == JTokenType.Null) view.nextPageButton.IsEnabled = false;
-            else view.nextPageButton.IsEnabled = true;
-            if (json["pagination"]["previous"].Type == JTokenType.Null) view.lastPageButton.IsEnabled = false;
-            else view.lastPageButton.IsEnabled = true;
-
-            total = (int)json["pagination"]["pages"];
+            view.nextPageButton.IsEnabled = (json["next_url"].Type != JTokenType.Null);
+            this.next_url = json["next_url"].Type == JTokenType.Null ? null : (string)json["next_url"];
 
             List<pixivIllust> illustbeforeList;
             illustbeforeList = new List<pixivIllust>();
 
-            foreach (JObject response in json.Value<JArray>("response"))
+            foreach (JObject work in json.Value<JArray>("illusts"))
             {
-                JObject work = response.Value<JObject>("work");
+
                 if (work["id"].Type == JTokenType.Null) continue;
-                if (!showR18)
-                {
-                    if (!work["age_limit"].ToString().Equals("all-age")) continue;
-                }
                 pixivIllust illust_before = new pixivIllust();
                 illust_before.illustID = (string)work["id"];
                 illust_before.titleName = (string)work["title"];
@@ -204,17 +162,18 @@ namespace pixiv_downloader.Pages
                 illust_before.authorName = (string)work["user"]["name"];
 
                 illust_before.ageLimit = false;
-                if (!work["age_limit"].ToString().Equals("all-age")) illust_before.ageLimit = true;
+                //if (!work["age_limit"].ToString().Equals("all-age")) illust_before.ageLimit = true;
 
                 illust_before.MediumURL = new List<string>();
-                illust_before.MediumURL.Add((string)work["image_urls"]["px_480mw"]);
+                illust_before.MediumURL.Add((string)work["image_urls"]["medium"]);
                 illust_before.isSetComplete = true;
 
 
                 illustbeforeList.Add(illust_before);
 
             }
-            illust = illustbeforeList.ToArray();
+            Debug.WriteLine(illustbeforeList);
+            illust = illust.Concat(illustbeforeList).ToArray();
         }
         public async void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
@@ -233,24 +192,25 @@ namespace pixiv_downloader.Pages
             cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/-sign-ban.png")));
             progressbar.Visibility = Visibility.Visible;
             ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = null;
+            illust = new pixivIllust[0];
 
             CancelTokenSource = new CancellationTokenSource();
             try
             {
-                await listview_load(1, 50);
+                await listview_load();
             }
-            catch
+            catch (Exception ex)
             {
                 except_return("User cancelled actions.");
                 view.IsEnabled = true;
                 view.nextPageButton.IsEnabled = false;
-                view.lastPageButton.IsEnabled = false;
 
                 cancelButton.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/img/loading.gif")));
                 processing = false;
+                Debug.WriteLine(ex);
                 return;
             }
-            view.pageLabel.Content = page.ToString() + "/" + total.ToString();
+
 
             ((ListView)view.piclistViewLeft.FindName("picListView")).ItemsSource = illust;
             except_return("Done");

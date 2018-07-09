@@ -214,21 +214,24 @@ namespace pixiv_API
 
             return JObject.Parse(http.Content.ReadAsStringAsync().Result);
         }
-        public JObject my_favourite_works(int page = 1, int per_page = 50, bool IsPublic = true)//收藏夹作品
+        public JObject my_favourite_works(string next_url = null, bool IsPublic = true)//收藏夹作品
         {
-            return my_favourite_worksAsync(page, per_page, IsPublic).Result;
+            return my_favourite_worksAsync(next_url, IsPublic).Result;
         }
-        public async Task<JObject> my_favourite_worksAsync(int page = 1, int per_page = 50, bool IsPublic = true, CancellationTokenSource cancellationTokenSource = null)//收藏夹作品
+        public async Task<JObject> my_favourite_worksAsync(string next_url = null, bool IsPublic = true, CancellationTokenSource cancellationTokenSource = null)//收藏夹作品
         {
-            string url = "https://public-api.secure.pixiv.net/v1/me/favorite_works.json";
-            string publicity = "private";
-            if (IsPublic) publicity = "public";
+            string url = "https://app-api.pixiv.net/v1/user/bookmarks/illust";
+            string restrict = "private";
+            if (IsPublic) restrict = "public";
             var parameters = new Dictionary<string, object>{
-               {"page",page},
-               {"per_page", per_page},
-               {"image_sizes","px_128x128,px_480mw,large"},
-               {"publicity",publicity }
+                { "user_id", oauth.User.id },
+               { "restrict",restrict }
             };
+            if (next_url != null)
+            {
+                url = next_url;
+                parameters = null;
+            }
             var task = oauth.HttpGetAsync(url, parameters, cancellationTokenSource);
 
             System.Net.Http.HttpResponseMessage http = null;

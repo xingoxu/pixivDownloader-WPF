@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace pixiv_downloader
 {
@@ -43,6 +44,7 @@ namespace pixiv_downloader
         private CancellationTokenSource cts;
         public pixivAPI pixivAPI;
         public pixivUser pixivUser;
+        public string refresh_token = null;
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
             if (processing)
@@ -63,20 +65,22 @@ namespace pixiv_downloader
             bool result = false;
             try
             {
-                result = await oauth.authAsync(usernameTextBox.Text, passwordTextBox.Password, cts);
+                result = (!string.IsNullOrWhiteSpace(this.refresh_token)) ? await oauth.authAsync(this.refresh_token, cts) : await oauth.authAsync(usernameTextBox.Text, passwordTextBox.Password, cts);
             }
-            catch
+            catch (Exception error)
             {//taskCancel or overtime
                 progressring.IsActive = false;
                 loginButton.Content = "登陆";
                 grid.IsEnabled = true;
                 loginButton.IconData = PathGeometry.Parse("F1 M 19.0002, 34L 19.0002, 42L 43.7502, 42L 33.7502, 52L 44.2502, 52L 58.2502, 38L 44.2502, 24L 33.7502, 24L 43.7502, 34L 19.0002, 34 Z ");
+                MessageBox.Show(error.Message);
                 return;
             }
             if (result)
             {
                 pixivAPI = new pixivAPI(oauth);
-                pixivUser = oauth.User;                
+                pixivUser = oauth.User;
+                this.refresh_token = pixivUser.refresh_token;
                 this.DialogResult = true;
                 this.Close();
             }

@@ -38,22 +38,58 @@ namespace pixiv_API
         {
             var parameters = new Dictionary<string, object>
             {
-                { "client_id", "bYGKuGVw91e0NMfPGp44euvGt59s" },
-                {"client_secret", "HP3RmkgAmEGro0gn1x9ioawQE8WMfvLXDz3ZqxpK" },
+                { "client_id", "MOBrBDS8blbauoSck0ZfDbtuzpyT" },
+                { "client_secret", "lsACyCD94FhDUtGTXi3QzcFE2uU1hqtDaKeqrdwj" },
 
-                {"grant_type" , "password" },
-                {"username", username },
-                {"password",password }
+                { "grant_type" , "password" },
+                { "username", username },
+                { "password", password }
                 //before is data
             };
 
             return await authAsync(parameters, tokensource);
         }
+        public async Task<bool> authAsync(string refresh_token, CancellationTokenSource tokensource = null)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "client_id", "MOBrBDS8blbauoSck0ZfDbtuzpyT" },
+                { "client_secret", "lsACyCD94FhDUtGTXi3QzcFE2uU1hqtDaKeqrdwj" },
+
+                { "grant_type" , "refresh_token" },
+                { "refresh_token", refresh_token }
+                //before is data
+            };
+
+            return await authAsync(parameters, tokensource);
+        }
+        private void checkAuthResponse(HttpResponseMessage result)
+        {
+
+            if (!result.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(result.Content.ReadAsStringAsync().Result);
+                JObject errorJson;
+                try
+                {
+                    errorJson = JObject.Parse(result.Content.ReadAsStringAsync().Result);
+                }
+                catch
+                {
+                    throw new Exception("Unknow Error: Login Request Failed");
+                }
+                var errors = errorJson.Value<JObject>("errors");
+                Debug.WriteLine("hello");
+                var errorStrings = errors.Values().Values("message");
+
+                throw new Exception(String.Join(",", errorStrings));
+            }
+        }
         private async Task<bool> authAsync(Dictionary<string, object> parameters, CancellationTokenSource tokensource = null)
         {
             var header = new Dictionary<string, object>
             {
-                {"Referer","http://www.pixiv.net/" }//header
+                { "Referer", "http://www.pixiv.net/" }//header
             };
             var api = "https://oauth.secure.pixiv.net/auth/token";//oauth_url
 
@@ -70,14 +106,14 @@ namespace pixiv_API
             }
             catch(Exception ex)
             {
+                if (ex.InnerException != null)
+                {
+                    throw new Exception(ex.Message + '\n' + ex.InnerException.Message);
+                }
                 throw ex;
             }
 
-            if (!result.IsSuccessStatusCode)
-            {
-                Debug.WriteLine(result);
-                return false;
-            }
+            this.checkAuthResponse(result);
 
 
             var json = JObject.Parse(result.Content.ReadAsStringAsync().Result);
@@ -100,15 +136,16 @@ namespace pixiv_API
         /// <summary>
         /// Caution:reAuthAsync will new a user
         /// </summary>
-        public async Task<bool> reAuthAsync(CancellationTokenSource tokensource = null) {
+        public async Task<bool> reAuthAsync(CancellationTokenSource tokensource = null)
+        {
             if (user == null) return false;
             var parameters = new Dictionary<string, object>
             {
-                { "client_id", "bYGKuGVw91e0NMfPGp44euvGt59s" },
-                {"client_secret", "HP3RmkgAmEGro0gn1x9ioawQE8WMfvLXDz3ZqxpK" },
+                { "client_id", "MOBrBDS8blbauoSck0ZfDbtuzpyT" },
+                { "client_secret", "lsACyCD94FhDUtGTXi3QzcFE2uU1hqtDaKeqrdwj" },
 
-                {"grant_type" , "refresh_token" },
-                {"refresh_token",user.refresh_token }
+                { "grant_type" , "refresh_token" },
+                { "refresh_token", user.refresh_token }
                 //before is data
             };
             return await authAsync(parameters, tokensource);
@@ -123,7 +160,10 @@ namespace pixiv_API
             Dictionary<string, object> req_header = new Dictionary<string, object>
             {
                 {"Referer","http://spapi.pixiv.net/" },//header
-                {"UserAgent","PixivIOSApp/5.8.3" }
+                {"User-Agent","PixivIOSApp/6.7.1 (iOS 10.3.1; iPhone8,1)" },
+                { "App-OS", "ios" },
+                { "App-OS-Version", "10.3.1" },
+                { "App-Version", "6.7.1" }
             };
             
             if (user != null) req_header.Add("Authorization", ("Bearer " + user.access_token));
@@ -195,7 +235,10 @@ namespace pixiv_API
             Dictionary<string, object> req_header = new Dictionary<string, object>
             {
                 {"Referer","http://spapi.pixiv.net/" },//header
-                {"UserAgent","PixivIOSApp/5.8.3" },
+                {"User-Agent","PixivIOSApp/6.7.1 (iOS 10.3.1; iPhone8,1)" },
+                { "App-OS", "ios" },
+                { "App-OS-Version", "10.3.1" },
+                { "App-Version", "6.7.1" },
                 {"Authorization",("Bearer "+user.access_token) }
             };
             
@@ -242,7 +285,10 @@ namespace pixiv_API
             Dictionary<string, object> req_header = new Dictionary<string, object>
             {
                 {"Referer","http://spapi.pixiv.net/" },//header
-                {"UserAgent","PixivIOSApp/5.8.3" },
+                {"User-Agent","PixivIOSApp/6.7.1 (iOS 10.3.1; iPhone8,1)" },
+                { "App-OS", "ios" },
+                { "App-OS-Version", "10.3.1" },
+                { "App-Version", "6.7.1" },
                 {"Authorization",("Bearer "+user.access_token) }
             };
 
@@ -311,7 +357,7 @@ namespace pixiv_API
             Dictionary<string, object> req_header = new Dictionary<string, object>
             {
                 {"Referer","http://spapi.pixiv.net/" },//header
-                {"UserAgent","PixivIOSApp/5.8.3" },
+                {"User-Agent","PixivIOSApp/6.7.1 (iOS 10.3.1; iPhone8,1)" },
                 {"Authorization",("Bearer "+user.access_token) }
             };
 
@@ -348,7 +394,7 @@ namespace pixiv_API
             //    foreach(KeyValuePair<string,string> x in req_header)
             //    {
             //        if (x.Key.Equals("Referer")) myRequest.Referer = req_header["Referer"];
-            //        else if (x.Key.Equals("User-Agent")) myRequest.UserAgent = req_header["User-Agent"];
+            //        else if (x.Key.Equals("User-Agent")) myRequest.User-Agent = req_header["User-Agent"];
             //        else
             //            myRequest.Headers.Add(x.Key, x.Value);
             //    }

@@ -174,7 +174,6 @@ namespace pixiv_downloader.Pages
                 Debug.WriteLine(2);
                 return;
             }
-
             //set next and last button
             if (json["pagination"]["next"].Type == JTokenType.Null) view.nextPageButton.IsEnabled = false;
             else view.nextPageButton.IsEnabled = true;

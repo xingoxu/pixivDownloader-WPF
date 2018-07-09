@@ -21,6 +21,8 @@ namespace pixiv_downloader
         [XmlElement]
         public string PassWord { get; set; }
         [XmlElement]
+        public string refresh_token { get; set; }
+        [XmlElement]
         public bool savePassword { get; set; }
         [XmlElement]
         public string currentTheme { get; set; }
